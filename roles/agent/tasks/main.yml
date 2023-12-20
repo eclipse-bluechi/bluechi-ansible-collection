@@ -1,0 +1,19 @@
+- name: Install the bluechi-agent package
+  ansible.builtin.package:
+    name:
+    - bluechi-agent
+    - bluechi-selinux
+
+- name: Copy the BlueChi Agent configuration file
+  ansible.builtin.template:
+    src: agent.conf.j2
+    dest: /etc/bluechi/agent.conf.d/agent.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Start the BlueChi Agent Service
+  ansible.builtin.systemd:
+    name: bluechi-agent.service
+    state: started
+    enabled: true

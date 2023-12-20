@@ -1,0 +1,29 @@
+---
+namespace: eclipse_bluechi
+name: bluechi
+version: 1.0.0
+readme: README.md
+authors:
+- Ygal Blum <ygal.blum@gmail.com>
+description: Collection to provision a BlueChi system with one controller and multiple agents
+license_file: LICENSE
+tags:
+- linux
+- systemd
+dependencies:
+  community.general: "*"
+repository: https://github.com/eclipse-bluechi/bluechi-ansible-collection
+documentation: https://github.com/eclipse-bluechi/bluechi-ansible-collection
+homepage: https://github.com/eclipse-bluechi/bluechi-ansible-collection
+issues: https://github.com/eclipse-bluechi/bluechi-ansible-collection/issues
+build_ignore:
+- .ansible-lint
+- .pylintrc
+- .yamllint
+- .git
+- .gitignore
+- ansible.cfg
+- requirements.yml
+- tests
+- vendor
+...

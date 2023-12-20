@@ -1,0 +1,11 @@
+[bluechi-agent]
+NodeName={{ agent_node_name | default(inventory_hostname) }}
+{%if agent_controller_address is defined %}
+ManagerAddress={{ agent_controller_address }}
+{%endif%}
+{%if agent_controller_host is defined %}
+ManagerHost={{ agent_controller_host }}
+{%endif%}
+{%if agent_controller_port is defined %}
+ManagerPort={{ agent_controller_port }}
+{%endif%}

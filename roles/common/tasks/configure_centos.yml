@@ -1,0 +1,14 @@
+- name: Assert that the major version is 9
+  ansible.builtin.assert:
+    that: ansible_facts.distribution_major_version == "9"
+    fail_msg: Eclipse BlueChi on CentOS Stream is supported only on version 9
+
+- name: Configure DNF
+  ansible.builtin.command: "dnf config-manager --set-enabled crb"
+  changed_when: true
+
+- name: Install EPEL
+  ansible.builtin.package:
+    name:
+    - epel-release
+    - epel-next-release

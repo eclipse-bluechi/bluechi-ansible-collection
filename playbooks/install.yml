@@ -1,0 +1,41 @@
+- name: Generate Facts
+  hosts: all
+  strategy: linear
+  run_once: true
+  tasks:
+  - name: Preflight checks
+    delegate_to: localhost
+    block:
+    - name: Check that there is one and only one bluechi_controller
+      ansible.builtin.assert:
+        that: groups['bluechi_controller'] | length == 1
+        fail_msg: There must be one and only one bluechi_controller
+
+  - name: Calculate facts
+    delegate_to: localhost
+    block:
+    - name: Set the Controller address
+      ansible.builtin.set_fact:
+        agent_controller_host: "{{ hostvars[groups['bluechi_controller'][0]]['ansible_facts']['default_ipv4']['address'] }}"
+
+    - name: Calculate the list of node names
+      ansible.builtin.set_fact:
+        _allowed_node_names: "{{ _allowed_node_names | default([]) + [hostvars[item]['agent_node_name'] | default(item)] }}"
+      loop: "{{ groups.all }}"
+
+    - name: Calculate the string for the allowed node names
+      ansible.builtin.set_fact:
+        controller_allowed_nodes: "{{ _allowed_node_names | join(',') }}"
+
+- name: Setup BlueChi Controller
+  hosts: bluechi_controller
+  become: true
+  roles:
+  - controller
+  - agent
+
+- name: Setup Agents
+  hosts: bluechi_agents
+  become: true
+  roles:
+  - agent
