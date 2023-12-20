@@ -1,0 +1,20 @@
+- name: Install the bluechi-controller and bluechi-ctl packages
+  ansible.builtin.package:
+    name:
+    - bluechi-controller
+    - bluechi-ctl
+    - bluechi-selinux
+
+- name: Copy the BlueChi Controller configuration file
+  ansible.builtin.template:
+    src: bluechi-controller.conf.j2
+    dest: /etc/bluechi/controller.conf.d/controller.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Start the BlueChi Controller
+  ansible.builtin.systemd:
+    name: bluechi-controller.service
+    state: started
+    enabled: true

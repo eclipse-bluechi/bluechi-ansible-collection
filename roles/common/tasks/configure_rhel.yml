@@ -1,0 +1,13 @@
+- name: Assert that the major version is 9
+  ansible.builtin.assert:
+    that: ansible_facts.distribution_major_version == "9"
+    fail_msg: Eclipse BlueChi on RHEL is supported only on version 9
+
+- name: Enable a RHSM repository
+  community.general.rhsm_repository:
+    name: "codeready-builder-for-rhel-9-{{ ansible_facts.architecture }}-rpms"
+
+- name: Install EPEL
+  ansible.builtin.dnf:
+    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm"
+    disable_gpg_check: true

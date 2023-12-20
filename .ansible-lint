@@ -1,0 +1,8 @@
+---
+exclude_paths:
+- .github
+- changelogs
+- inventory.yml
+skip_list:
+- galaxy[no-changelog]
+...

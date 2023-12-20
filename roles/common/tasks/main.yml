@@ -1,0 +1,16 @@
+- name: Make sure the distribution facts are available
+  ansible.builtin.setup:
+    gather_subset:
+    - "!all"
+    - "!min"
+    - distribution
+    - distribution_major_version
+    - architecture
+
+- name: Configure CentOS
+  ansible.builtin.include_tasks: configure_centos.yml
+  when: ansible_facts.distribution == "CentOS"
+
+- name: Configure RHEL
+  ansible.builtin.include_tasks: configure_rhel.yml
+  when: ansible_facts.distribution == "RedHat"

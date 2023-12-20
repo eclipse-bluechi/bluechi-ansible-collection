@@ -1,0 +1,18 @@
+name: Ansible Lint
+on:
+- push
+- pull_request
+- workflow_call
+
+jobs:
+  ansible-lint:
+    name: Ansible Lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Run ansible-lint
+      uses: ansible/ansible-lint@main
