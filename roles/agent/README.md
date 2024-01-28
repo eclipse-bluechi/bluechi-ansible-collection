@@ -6,7 +6,12 @@ The `agent` role handles the installation and configuration of the BlueChi Agent
 
 ### Installing on RHEL
 
-When installing on RHEL, the machine should already be subscribed using the `subscription-manager`
+When installing on RHEL, the machine should already be subscribed using the `subscription-manager`.
+
+In addition, make sure to enable the Subscription-Manager Repository:
+```
+subscription-manager config --rhsm.manage_repos=1
+```
 
 ## Role Variables
 
