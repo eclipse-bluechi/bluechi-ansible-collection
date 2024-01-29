@@ -26,6 +26,8 @@ jobs:
     needs:
       - prechecks
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -73,6 +75,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANSIBLE_FORCE_COLOR: 1
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
