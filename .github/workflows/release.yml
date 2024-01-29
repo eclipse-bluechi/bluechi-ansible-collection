@@ -77,10 +77,11 @@ jobs:
       ANSIBLE_FORCE_COLOR: 1
     permissions:
       pull-requests: write
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
@@ -95,13 +96,11 @@ jobs:
 
       - name: Create Pull Request
         id: prcreate
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Update changelog ${{ github.ref_name }}
           committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
+          signoff: true
           base: main
           branch: changelog-patches
           delete-branch: true
@@ -115,5 +114,4 @@ jobs:
           labels: |
             changelog
             automated pr
-          draft: false
 ...
