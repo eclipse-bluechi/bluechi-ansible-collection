@@ -1,0 +1,8 @@
+ancestor: null
+releases:
+  1.0.0:
+    changes:
+      release_summary: Initial release of the Eclipse BlueChi Ansible Collection
+    fragments:
+    - initial-release.yml
+    release_date: '2024-01-29'
