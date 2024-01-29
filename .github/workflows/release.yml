@@ -53,7 +53,7 @@ jobs:
         id: vers
 
       - name: Install collection
-        run: ansible-galaxy collection install ./infra-lvm_snapshots-${{ steps.vers.outputs.NUM }}.tar.gz -p /home/runner/collections
+        run: ansible-galaxy collection install ./eclipse_bluechi-bluechi-${{ steps.vers.outputs.NUM }}.tar.gz -p /home/runner/collections
         shell: bash
         working-directory: ${{ vars.GITHUB_PATH }}
 
